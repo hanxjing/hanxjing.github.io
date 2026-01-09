@@ -10,12 +10,16 @@
   <link rel="Shortcut Icon" href="./logo/hp_logo.jpg" sizes="16x16" type="image/x-icon" />
   <link rel="Bookmark" href="./logo/hp_logo.jpg" sizes="16x16" type="image/x-icon" />
 
-  <!-- Keep your existing stylesheet links (optional) -->
+  <!-- If you keep GitHub Pages theme css, it may override header/section/wrapper styles.
+       We will hard-override them below inside .page to keep the left sidebar fixed. -->
   <link rel="stylesheet" href="stylesheets/styles.css" />
   <link rel="stylesheet" href="stylesheets/pygment_trac.css" />
 
   <style>
-    :root{
+    /* =========================
+       Scoped page styles
+       ========================= */
+    .page{
       --text:#111827;
       --muted:#6b7280;
       --link:#0050e7;
@@ -25,30 +29,38 @@
       --shadow: 0 10px 30px rgba(0,0,0,.06);
       --radius: 14px;
       --maxw: 980px;
-    }
 
-    * { box-sizing: border-box; }
-    body{
-      margin:0;
-      padding:0;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size:16px;
-      color:var(--text);
+      color: var(--text);
       background: var(--bg);
-      -webkit-text-size-adjust: none;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
     }
 
-    a{ color:var(--link); text-decoration:none; }
-    a:hover{ text-decoration:underline; }
-    a:visited{ color:var(--link); }
-
-    .wrapper{
-      max-width: var(--maxw);
-      margin: 28px auto;
-      padding: 0 16px;
+    /* Prevent external theme from breaking layout */
+    .page .wrapper,
+    .page .card,
+    .page .layout,
+    .page header,
+    .page section{
+      float: none !important;
+      position: static !important;
+      width: auto !important;
+      max-width: none !important;
+      margin: 0 !important;
     }
 
-    .card{
+    .page a{ color: var(--link); text-decoration:none; }
+    .page a:hover{ text-decoration:underline; }
+    .page a:visited{ color: var(--link); }
+
+    .page .wrapper{
+      max-width: var(--maxw) !important;
+      margin: 28px auto !important;
+      padding: 0 16px !important;
+    }
+
+    .page .card{
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -56,41 +68,42 @@
       overflow: hidden;
     }
 
-    .layout{
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 18px;
-      padding: 18px;
-      align-items: start;
+    .page .layout{
+      display: grid !important;
+      grid-template-columns: 280px 1fr !important;
+      gap: 18px !important;
+      padding: 18px !important;
+      align-items: start !important;
     }
 
-    header{
+    .page header{
       border-right: 1px solid var(--border);
       padding-right: 18px;
     }
 
-    .name{
+    .page .name{
       font-size: 28px;
       font-weight: 700;
       margin: 0 0 10px 0;
       line-height: 1.15;
     }
 
-    .portrait{
+    .page .portrait{
       width: 100%;
       border-radius: 12px;
       border: 1px solid var(--border);
       display: block;
     }
 
-    .contact{
+    .page .contact{
       margin-top: 12px;
       color: var(--muted);
       font-size: 14px;
       line-height: 1.55;
+      word-break: break-word;
     }
 
-    .links{
+    .page .links{
       margin-top: 10px;
       display: flex;
       flex-wrap: wrap;
@@ -98,65 +111,59 @@
       font-size: 14px;
     }
 
-    section{
+    .page section{
       padding-left: 2px;
       min-width: 0;
     }
 
-    h2{
+    .page h2{
       font-size: 20px;
       margin: 0 0 10px 0;
       padding: 0;
+      line-height: 1.25;
     }
 
-    h3{
-      font-size: 18px;
-      margin: 14px 0 8px 0;
-      padding: 0;
+    .page p{
+      margin: 0 0 10px 0;
+      font-size: 16px;
+      line-height: 1.65;
     }
 
-    p{ margin: 0 0 10px 0; font-size: 16px; line-height: 1.65; }
-    ul{ margin: 8px 0 0 22px; padding: 0; }
-    li{ margin: 6px 0; line-height: 1.55; }
+    .page ul{ margin: 8px 0 0 22px; padding: 0; }
+    .page li{ margin: 6px 0; }
 
-    hr{
+    .page hr{
       border: none;
       border-top: 1px solid var(--border);
       margin: 14px 0;
     }
 
     /* Publications */
-    .pub-list{
+    .page .pub-list{
       list-style: disc;
       padding-left: 18px;
       margin-left: 0;
     }
-    .pub-item{
+    .page .pub-item{
       margin: 12px 0 16px 0;
     }
-    .pub-title{
+    .page .pub-title{
       font-weight: 700;
       color: var(--text);
     }
-    .pub-venue{
-      color: var(--text);
-    }
-    .pub-authors{
-      color: var(--text);
-    }
-    .pub-links{
+    .page .pub-links{
       margin-top: 6px;
       font-size: 14px;
       color: var(--muted);
     }
-    .pub-links a{ margin-right: 8px; }
+    .page .pub-links a{ margin-right: 8px; }
 
-    /* Small screens */
+    /* Responsive */
     @media (max-width: 900px){
-      .layout{
-        grid-template-columns: 1fr;
+      .page .layout{
+        grid-template-columns: 1fr !important;
       }
-      header{
+      .page header{
         border-right: none;
         padding-right: 0;
         border-bottom: 1px solid var(--border);
@@ -170,187 +177,190 @@
 </head>
 
 <body>
-  <div class="wrapper">
-    <div class="card">
-      <div class="layout">
-        <header>
-          <div class="name">Han, Xianjing</div>
+  <div class="page">
+    <div class="wrapper">
+      <div class="card">
+        <div class="layout">
+          <header>
+            <div class="name">Han, Xianjing</div>
 
-          <img class="portrait" src="files/xianjing_photo.jpg" alt="Xianjing Han photo" />
+            <img class="portrait" src="files/xianjing_photo.jpg" alt="Xianjing Han photo" />
 
-          <div class="contact">
-            <div>📍 50 Nanyang Ave, Singapore 639798</div>
-            <div>hanxianjing2018 AT gmail.com</div>
+            <div class="contact">
+              <div>📍 50 Nanyang Ave, Singapore 639798</div>
+              <div>hanxianjing2018 AT gmail.com</div>
 
-            <div class="links">
-              <a href="https://github.com/hanxjing" target="_blank" rel="noopener">[GitHub]</a>
-              <a href="https://scholar.google.com/citations?user=kxD8RqQAAAAJ&hl=en" target="_blank" rel="noopener">[Scholar]</a>
+              <div class="links">
+                <a href="https://github.com/hanxjing" target="_blank" rel="noopener">[GitHub]</a>
+                <a href="https://scholar.google.com/citations?user=kxD8RqQAAAAJ&hl=en" target="_blank" rel="noopener">[Scholar]</a>
+              </div>
             </div>
-          </div>
-        </header>
+          </header>
 
-        <section>
-          <h2>Welcome to Han, Xianjing (韩贤静)'s Homepage</h2>
+          <section>
+            <h2>Welcome to Han, Xianjing (韩贤静)'s Homepage</h2>
 
-          <hr />
+            <hr />
 
-          <h2 id="biography">About Me</h2>
-          <p style="text-align: justify;">
-            Han, Xianjing is currently a research fellow in SIGNAL group, EEE, Nanyang Technologycal University working with
-            Prof. <a href="https://personal.ntu.edu.sg/wptay" target="_blank" rel="noopener">Tay, Wee Peng</a>.
-            Before that, she is research fellow in MMRL Lab, SoC, National University of Singapore, working with
-            Prof. <a href="https://scholar.google.com/citations?user=IDREwXEAAAAJ&hl=zh-CN" target="_blank" rel="noopener">Roger Zimmermann</a>.
-            She received her Ph.D. degree from Shandong University, supervised by
-            Prof. <a href="https://liqiangnie.github.io/" target="_blank" rel="noopener">Nie, Liqiang</a> and
-            Prof. <a href="https://xuemengsong.github.io/" target="_blank" rel="noopener">Song, Xuemeng</a>.
-            She was a visiting scholar at Texas State University, working with
-            Prof. <a href="https://tomyan555.github.io/" target="_blank" rel="noopener">Yan Yan</a>.
-            She received her bachelor’s degree from Northeastern University, China.
-          </p>
+            <h2 id="biography">About Me</h2>
+            <p style="text-align: justify;">
+              Han, Xianjing is currently a research fellow in SIGNAL group, EEE, Nanyang Technologycal University working with
+              Prof. <a href="https://personal.ntu.edu.sg/wptay" target="_blank" rel="noopener">Tay, Wee Peng</a>.
+              Before that, she is research fellow in MMRL Lab, SoC, National University of Singapore, working with
+              Prof. <a href="https://scholar.google.com/citations?user=IDREwXEAAAAJ&hl=zh-CN" target="_blank" rel="noopener">Roger Zimmermann</a>.
+              She received her Ph.D. degree from Shandong University, supervised by
+              Prof. <a href="https://liqiangnie.github.io/" target="_blank" rel="noopener">Nie, Liqiang</a> and
+              Prof. <a href="https://xuemengsong.github.io/" target="_blank" rel="noopener">Song, Xuemeng</a>.
+              She was a visiting scholar at Texas State University, working with
+              Prof. <a href="https://tomyan555.github.io/" target="_blank" rel="noopener">Yan Yan</a>.
+              She received her bachelor’s degree from Northeastern University, China.
+            </p>
 
-          <hr />
+            <hr />
 
-          <h2 id="research-interest">Research Interest</h2>
-          <ul>
-            <li>Visual Geolocalization</li>
-            <li>Scene Understanding</li>
-            <li>Multimodal Large Language Model</li>
-          </ul>
+            <h2 id="research-interest">Research Interest</h2>
+            <ul>
+              <li>Visual Geolocalization</li>
+              <li>Scene Understanding</li>
+              <li>Multimodal Large Language Model</li>
+            </ul>
 
-          <hr />
+            <hr />
 
-          <h2 id="publications">Publication</h2>
-          <ul class="pub-list">
-            <li class="pub-item">
-              <div class="pub-title">Traffic Sign Localization and Orientation Classification for Automated Map Updating</div>
-              <div class="pub-venue"><em><b>IEEE TCSVT 2025</b></em></div>
-              <div class="pub-authors"><b>Xianjing Han</b>, Wenmiao Hu, Xuemeng Song, Hannes Kruppa, See-Kiong Ng, Roger Zimmermann.</div>
-              <div class="pub-links">
-                <a href="files/2025 TCSVT.pdf">PDF</a> |
-                <a href="https://github.com/hanxjing/AutoTS" target="_blank" rel="noopener">Code</a>
-              </div>
-            </li>
+            <h2 id="publications">Publication</h2>
+            <ul class="pub-list">
+              <li class="pub-item">
+                <div class="pub-title">Traffic Sign Localization and Orientation Classification for Automated Map Updating</div>
+                <div><em><b>IEEE TCSVT 2025</b></em></div>
+                <div><b>Xianjing Han</b>, Wenmiao Hu, Xuemeng Song, Hannes Kruppa, See-Kiong Ng, Roger Zimmermann.</div>
+                <div class="pub-links">
+                  <a href="files/2025 TCSVT.pdf">PDF</a> |
+                  <a href="https://github.com/hanxjing/AutoTS" target="_blank" rel="noopener">Code</a>
+                </div>
+              </li>
 
-            <li class="pub-item">
-              <div class="pub-title">EARN: Efficient Inference Acceleration for LLM-based Generative Recommendation by Register Tokens</div>
-              <div class="pub-venue"><em><b>ACM SIGKDD 2025</b></em></div>
-              <div class="pub-authors">Chaoqun Yang, Xinyu Lin, Wenjie Wang, Yongqi Li, Teng Sun, <b>Xianjing Han</b>, Tat-Seng Chua.</div>
-              <div class="pub-links">
-                <a href="files/2025 KDD.pdf">PDF</a>
-              </div>
-            </li>
+              <li class="pub-item">
+                <div class="pub-title">EARN: Efficient Inference Acceleration for LLM-based Generative Recommendation by Register Tokens</div>
+                <div><em><b>ACM SIGKDD 2025</b></em></div>
+                <div>Chaoqun Yang, Xinyu Lin, Wenjie Wang, Yongqi Li, Teng Sun, <b>Xianjing Han</b>, Tat-Seng Chua.</div>
+                <div class="pub-links">
+                  <a href="files/2025 KDD.pdf">PDF</a>
+                </div>
+              </li>
 
-            <li class="pub-item">
-              <div class="pub-title">Translating street view imagery to correct perspectives to enhance bikeability and walkability studies</div>
-              <div class="pub-venue"><em><b>International Journal of Geographical Information Science 2024</b></em></div>
-              <div class="pub-authors">Koichi Ito, Matias Quintana, <b>Xianjing Han</b>, Roger Zimmermann, Filip Biljecki.</div>
-              <div class="pub-links">
-                <a href="https://www.researchgate.net/profile/Koichi-Ito-5/publication/383487411_Translating_street_view_imagery_to_correct_perspectives_to_enhance_bikeability_and_walkability_studies/links/66cfe9702390e50b2c1d6b00/Translating-street-view-imagery-to-correct-perspectives-to-enhance-bikeability-and-walkability-studies.pdf"
-                   target="_blank" rel="noopener">PDF</a>
-              </div>
-            </li>
+              <li class="pub-item">
+                <div class="pub-title">Translating street view imagery to correct perspectives to enhance bikeability and walkability studies</div>
+                <div><em><b>International Journal of Geographical Information Science 2024</b></em></div>
+                <div>Koichi Ito, Matias Quintana, <b>Xianjing Han</b>, Roger Zimmermann, Filip Biljecki.</div>
+                <div class="pub-links">
+                  <a href="https://www.researchgate.net/profile/Koichi-Ito-5/publication/383487411_Translating_street_view_imagery_to_correct_perspectives_to_enhance_bikeability_and_walkability_studies/links/66cfe9702390e50b2c1d6b00/Translating-street-view-imagery-to-correct-perspectives-to-enhance-bikeability-and-walkability-studies.pdf"
+                     target="_blank" rel="noopener">PDF</a>
+                </div>
+              </li>
 
-            <li class="pub-item">
-              <div class="pub-title">PetalView: Fine-grained Location and Orientation Extraction of Street-view Images via Cross-view Local Search</div>
-              <div class="pub-venue"><em><b>ACM MM 2023</b></em></div>
-              <div class="pub-authors">Wenmiao Hu, Yichen Zhang, Yuxuan Liang, <b>Xianjing Han</b>, Yifang Yin, Hannes Kruppa, See-Kiong Ng, Roger Zimmermann.</div>
-              <div class="pub-links">
-                <a href="https://dl.acm.org/doi/abs/10.1145/3581783.3612007" target="_blank" rel="noopener">PDF</a>
-              </div>
-            </li>
+              <li class="pub-item">
+                <div class="pub-title">PetalView: Fine-grained Location and Orientation Extraction of Street-view Images via Cross-view Local Search</div>
+                <div><em><b>ACM MM 2023</b></em></div>
+                <div>Wenmiao Hu, Yichen Zhang, Yuxuan Liang, <b>Xianjing Han</b>, Yifang Yin, Hannes Kruppa, See-Kiong Ng, Roger Zimmermann.</div>
+                <div class="pub-links">
+                  <a href="https://dl.acm.org/doi/abs/10.1145/3581783.3612007" target="_blank" rel="noopener">PDF</a>
+                </div>
+              </li>
 
-            <li class="pub-item">
-              <div class="pub-title">Divide-and-Conquer Predictor for Unbiased Scene Graph Generation</div>
-              <div class="pub-venue"><em><b>IEEE TCSVT 2022</b></em></div>
-              <div class="pub-authors"><b>Xianjing Han</b>, Xingning Dong, Xuemeng Song, Tian Gan, Yibing Zhan, Yan Yan, Liqiang Nie.</div>
-              <div class="pub-links">
-                <a href="files/TCSVT2022.pdf">PDF</a> |
-                <a href="https://github.com/hanxjing/DCNet" target="_blank" rel="noopener">Code</a>
-              </div>
-            </li>
+              <li class="pub-item">
+                <div class="pub-title">Divide-and-Conquer Predictor for Unbiased Scene Graph Generation</div>
+                <div><em><b>IEEE TCSVT 2022</b></em></div>
+                <div><b>Xianjing Han</b>, Xingning Dong, Xuemeng Song, Tian Gan, Yibing Zhan, Yan Yan, Liqiang Nie.</div>
+                <div class="pub-links">
+                  <a href="files/TCSVT2022.pdf">PDF</a> |
+                  <a href="https://github.com/hanxjing/DCNet" target="_blank" rel="noopener">Code</a>
+                </div>
+              </li>
 
-            <li class="pub-item">
-              <div class="pub-title">DBiased-P: Dual-Biased Predicate Predictor for Unbiased Scene Graph Generation</div>
-              <div class="pub-venue"><em><b>IEEE TMM 2022</b></em></div>
-              <div class="pub-authors"><b>Xianjing Han</b>, Xuemeng Song, Xingning Dong, Yinwei Wei, Meng Liu, Liqiang Nie.</div>
-              <div class="pub-links">
-                <a href="files/TMM2022.pdf">PDF</a>
-              </div>
-            </li>
+              <li class="pub-item">
+                <div class="pub-title">DBiased-P: Dual-Biased Predicate Predictor for Unbiased Scene Graph Generation</div>
+                <div><em><b>IEEE TMM 2022</b></em></div>
+                <div><b>Xianjing Han</b>, Xuemeng Song, Xingning Dong, Yinwei Wei, Meng Liu, Liqiang Nie.</div>
+                <div class="pub-links">
+                  <a href="files/TMM2022.pdf">PDF</a>
+                </div>
+              </li>
 
-            <li class="pub-item">
-              <div class="pub-title">Multi-Modal Interaction Graph Convolutional Network for Temporal Language Localization in Videos</div>
-              <div class="pub-venue"><em><b>IEEE TIP 2021</b></em></div>
-              <div class="pub-authors">Zongmeng Zhang, <b>Xianjing Han</b>, Xuemeng Song, Yan Yan, Liqiang Nie.</div>
-              <div class="pub-links">
-                <a href="files/TIP2021.pdf">PDF</a> |
-                <a href="https://github.com/zmzhang2000/MIGCN" target="_blank" rel="noopener">Code</a>
-              </div>
-            </li>
+              <li class="pub-item">
+                <div class="pub-title">Multi-Modal Interaction Graph Convolutional Network for Temporal Language Localization in Videos</div>
+                <div><em><b>IEEE TIP 2021</b></em></div>
+                <div>Zongmeng Zhang, <b>Xianjing Han</b>, Xuemeng Song, Yan Yan, Liqiang Nie.</div>
+                <div class="pub-links">
+                  <a href="files/TIP2021.pdf">PDF</a> |
+                  <a href="https://github.com/zmzhang2000/MIGCN" target="_blank" rel="noopener">Code</a>
+                </div>
+              </li>
 
-            <li class="pub-item">
-              <div class="pub-title">Generative Attribute Manipulation Scheme for Flexible Fashion Search</div>
-              <div class="pub-venue"><em><b>ACM SIGIR 2020</b></em></div>
-              <div class="pub-authors">Xin Yang, Xuemeng Song, <b>Xianjing Han</b>, Haokun Wen, Jie Nie, Liqiang Nie.</div>
-              <div class="pub-links">
-                <a href="files/sigir2020.pdf">PDF</a> |
-                <a href="https://joeyangbuer.wixsite.com/amgan/" target="_blank" rel="noopener">Code</a>
-              </div>
-            </li>
+              <li class="pub-item">
+                <div class="pub-title">Generative Attribute Manipulation Scheme for Flexible Fashion Search</div>
+                <div><em><b>ACM SIGIR 2020</b></em></div>
+                <div>Xin Yang, Xuemeng Song, <b>Xianjing Han</b>, Haokun Wen, Jie Nie, Liqiang Nie.</div>
+                <div class="pub-links">
+                  <a href="files/sigir2020.pdf">PDF</a> |
+                  <a href="https://joeyangbuer.wixsite.com/amgan/" target="_blank" rel="noopener">Code</a>
+                </div>
+              </li>
 
-            <li class="pub-item">
-              <div class="pub-title">GP-BPR: Personalized Compatibility Modeling for Clothing Matching</div>
-              <div class="pub-venue"><em><b>ACM MM 2019</b></em></div>
-              <div class="pub-authors">Xuemeng Song, <b>Xianjing Han</b>, Yunkai Li, Jingyuan Chen, Xin-Shun Xu, Liqiang Nie.</div>
-              <div class="pub-links">
-                <a href="files/mm2019.pdf">PDF</a> |
-                <a href="https://github.com/hanxjing/GP-BPR" target="_blank" rel="noopener">Code</a>
-              </div>
-            </li>
+              <li class="pub-item">
+                <div class="pub-title">GP-BPR: Personalized Compatibility Modeling for Clothing Matching</div>
+                <div><em><b>ACM MM 2019</b></em></div>
+                <div>Xuemeng Song, <b>Xianjing Han</b>, Yunkai Li, Jingyuan Chen, Xin-Shun Xu, Liqiang Nie.</div>
+                <div class="pub-links">
+                  <a href="files/mm2019.pdf">PDF</a> |
+                  <a href="https://github.com/hanxjing/GP-BPR" target="_blank" rel="noopener">Code</a>
+                </div>
+              </li>
 
-            <li class="pub-item">
-              <div class="pub-title">Neural Compatibility Modeling with Probabilistic Knowledge Distillation</div>
-              <div class="pub-venue"><em><b>IEEE TIP 2019</b></em></div>
-              <div class="pub-authors"><b>Xianjing Han</b>, Xuemeng Song, Yiyang Yao, Xin-Shun Xu and Liqiang Nie.</div>
-              <div class="pub-links">
-                <a href="files/tip2019.pdf">PDF</a> |
-                <a href="https://github.com/hanxjing/PKD-DBPR" target="_blank" rel="noopener">Code</a>
-              </div>
-            </li>
+              <li class="pub-item">
+                <div class="pub-title">Neural Compatibility Modeling with Probabilistic Knowledge Distillation</div>
+                <div><em><b>IEEE TIP 2019</b></em></div>
+                <div><b>Xianjing Han</b>, Xuemeng Song, Yiyang Yao, Xin-Shun Xu and Liqiang Nie.</div>
+                <div class="pub-links">
+                  <a href="files/tip2019.pdf">PDF</a> |
+                  <a href="https://github.com/hanxjing/PKD-DBPR" target="_blank" rel="noopener">Code</a>
+                </div>
+              </li>
 
-            <li class="pub-item">
-              <div class="pub-title">Prototype-guided Attribute-wise Interpretable Scheme for Clothing Matching</div>
-              <div class="pub-venue"><em><b>ACM SIGIR 2019</b></em></div>
-              <div class="pub-authors"><b>Xianjing Han</b>, Xuemeng Song, Jianhua Yin, Yinglong Wang and Liqiang Nie.</div>
-              <div class="pub-links">
-                <a href="files/sigir2019.pdf">PDF</a> |
-                <a href="https://github.com/hanxjing/PAICM" target="_blank" rel="noopener">Code</a>
-              </div>
-            </li>
+              <li class="pub-item">
+                <div class="pub-title">Prototype-guided Attribute-wise Interpretable Scheme for Clothing Matching</div>
+                <div><em><b>ACM SIGIR 2019</b></em></div>
+                <div><b>Xianjing Han</b>, Xuemeng Song, Jianhua Yin, Yinglong Wang and Liqiang Nie.</div>
+                <div class="pub-links">
+                  <a href="files/sigir2019.pdf">PDF</a> |
+                  <a href="https://github.com/hanxjing/PAICM" target="_blank" rel="noopener">Code</a>
+                </div>
+              </li>
 
-            <li class="pub-item">
-              <div class="pub-title">Neural Compatibility Modeling with Attentive Knowledge Distillation</div>
-              <div class="pub-venue"><em><b>ACM SIGIR 2018</b></em></div>
-              <div class="pub-authors">Xuemeng Song, Fuli Feng, <b>Xianjing Han</b>, Xin Yang, Liqiang Nie, Wei Liu.</div>
-              <div class="pub-links">
-                <a href="files/sigir2018.pdf">PDF</a> |
-                <a href="https://github.com/hanxjing/AKD-DBPR" target="_blank" rel="noopener">Code</a>
-              </div>
-            </li>
-          </ul>
+              <li class="pub-item">
+                <div class="pub-title">Neural Compatibility Modeling with Attentive Knowledge Distillation</div>
+                <div><em><b>ACM SIGIR 2018</b></em></div>
+                <div>Xuemeng Song, Fuli Feng, <b>Xianjing Han</b>, Xin Yang, Liqiang Nie, Wei Liu.</div>
+                <div class="pub-links">
+                  <a href="files/sigir2018.pdf">PDF</a> |
+                  <a href="https://github.com/hanxjing/AKD-DBPR" target="_blank" rel="noopener">Code</a>
+                </div>
+              </li>
+            </ul>
 
-          <hr />
+            <hr />
 
-          <h2 id="service">Service</h2>
-          <ul>
-            <li><strong>Conference Reviewer</strong><br />
-              AAAI, ACM MM, ACM MM Asia, ICMR, WSDM
-            </li>
-            <li><strong>Journal Reviewer</strong><br />
-              IEEE TIP, IEEE TKDE, IEEE TMM, IEEE TCSVT, ACM ToMM, Information Sciences
-            </li>
-          </ul>
-        </section>
+            <h2 id="service">Service</h2>
+            <ul>
+              <li><strong>Conference Reviewer</strong><br />
+                AAAI, ACM MM, ACM MM Asia, ICMR, WSDM
+              </li>
+              <li><strong>Journal Reviewer</strong><br />
+                IEEE TIP, IEEE TKDE, IEEE TMM, IEEE TCSVT, ACM ToMM, Information Sciences
+              </li>
+            </ul>
+
+          </section>
+        </div>
       </div>
     </div>
   </div>
